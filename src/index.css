@@ -1,0 +1,449 @@
+@import "tailwindcss";
+
+/* Paleta stricta in 4 culori calde:
+   1. #FFFFFF (--bg-surface / --accent-ink) — Pure White
+   2. #FAF7F2 (--bg-canvas / --bg-subtle) — Warm Luminous Ivory
+   3. #1F1915 (--ink-primary + opacitati pentru text secundar / borduri) — Warm Espresso Ink
+   4. #B84A0A (--accent + opacitati pentru zone active) — Sunlit Warm Amber
+*/
+:root {
+  color-scheme: light;
+  --bg-canvas: #faf7f2;
+  --bg-surface: #ffffff;
+  --bg-subtle: #faf7f2;
+  --ink-primary: #1f1915;
+  --ink-secondary: rgba(31, 25, 21, 0.70);
+  --accent: #b84a0a;
+  --accent-ink: #ffffff;
+  --accent-soft: rgba(184, 74, 10, 0.08);
+  --accent-border: rgba(184, 74, 10, 0.32);
+  --border-subtle: rgba(31, 25, 21, 0.12);
+  --border-interactive: rgba(31, 25, 21, 0.28);
+  --font-display: 'Google Sans', system-ui, -apple-system, sans-serif;
+  --font-body: 'Google Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Google Sans Code', ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-canvas);
+    color: var(--ink-primary);
+    font-family: var(--font-body);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--bg-canvas);
+    color: var(--ink-primary);
+    font-family: var(--font-body);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.025em;
+    color: var(--ink-primary);
+  }
+
+  code,
+  pre,
+  kbd,
+  samp {
+    font-family: var(--font-mono);
+  }
+
+  ::selection {
+    background-color: rgba(184, 74, 10, 0.16);
+    color: var(--ink-primary);
+  }
+
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  button:not(:disabled),
+  [role="tab"],
+  a[href] {
+    min-block-size: 24px;
+  }
+
+  @media (pointer: coarse) {
+    button:not(:disabled),
+    [role="tab"],
+    .interactive-target {
+      min-block-size: 44px;
+      min-inline-size: 44px;
+    }
+  }
+}
+
+/* Visually hidden utility keeping focusable skip links accessible */
+.visually-hidden:where(:not(:focus-within, :active)) {
+  position: absolute !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 120;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  background-color: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 10px 26px rgba(31, 25, 21, 0.16);
+}
+
+/* SpotlightCard tracking via CSS variables */
+.spotlight-card {
+  position: relative;
+  --spot-x: 50%;
+  --spot-y: 50%;
+  --spot-color: rgba(184, 74, 10, 0.065);
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+}
+
+.spotlight-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  background: radial-gradient(
+    420px circle at var(--spot-x) var(--spot-y),
+    var(--spot-color),
+    transparent 65%
+  );
+}
+
+.spotlight-card:hover::before,
+.spotlight-card:focus-within::before {
+  opacity: 1;
+}
+
+/* ShinyText sweep — strictly opted in when motion is enabled */
+.shiny-text {
+  color: var(--ink-primary);
+  display: inline-block;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .app-root:not(.motion-paused) .shiny-text {
+    background-image: linear-gradient(
+      115deg,
+      #1f1915 0%,
+      #1f1915 40%,
+      #b84a0a 50%,
+      #1f1915 60%,
+      #1f1915 100%
+    );
+    background-size: 240% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: shiny-sweep 4.8s linear infinite;
+  }
+}
+
+@keyframes shiny-sweep {
+  0% {
+    background-position: 120% 0;
+  }
+  100% {
+    background-position: -120% 0;
+  }
+}
+
+/* StarBorder orbiting glow — architectural light frame */
+.star-border-shell {
+  position: relative;
+  border-radius: 0.75rem;
+  padding: 1px;
+  background: rgba(31, 25, 21, 0.14);
+  overflow: hidden;
+}
+
+.star-border-orbit {
+  position: absolute;
+  inset: -40%;
+  pointer-events: none;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 265deg,
+    rgba(184, 74, 10, 0.35) 310deg,
+    transparent 360deg
+  );
+  opacity: 0.7;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .app-root:not(.motion-paused) .star-border-orbit {
+    animation: orbit-spin 11s linear infinite;
+  }
+}
+
+@keyframes orbit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive comparison table following container-query stacked layout */
+.table-container {
+  container-type: inline-size;
+}
+
+.table-wrapper {
+  overflow: auto;
+  max-inline-size: 100%;
+  max-block-size: min(640px, 78vh);
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-subtle);
+  background-color: var(--bg-surface);
+}
+
+.comparison-table {
+  inline-size: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: left;
+  font-size: 0.9375rem;
+  --col-2: "Tip proiect";
+  --col-3: "Limită gratuită";
+  --col-4: "Card bancar";
+  --col-5: "Preview PR";
+  --col-6: "Backend / DB";
+  --col-7: "Ideal pentru";
+}
+
+.comparison-table thead {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 3;
+  background-color: var(--bg-subtle);
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 1rem 1.1rem;
+  border-block-end: 1px solid var(--border-subtle);
+  vertical-align: top;
+}
+
+.comparison-table thead th {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--ink-primary);
+  border-block-end: 1px solid var(--border-interactive);
+  white-space: nowrap;
+}
+
+.comparison-table tbody th[scope="row"] {
+  position: sticky;
+  inset-inline-start: 0;
+  z-index: 2;
+  background-color: var(--bg-surface);
+  border-inline-end: 1px solid var(--border-subtle);
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--ink-primary);
+  min-inline-size: 11.5rem;
+}
+
+.comparison-table tbody tr:hover th[scope="row"],
+.comparison-table tbody tr:hover td {
+  background-color: var(--bg-subtle);
+}
+
+@container (width < 680px) {
+  .table-wrapper {
+    max-block-size: none;
+    overflow: visible;
+    border: none;
+    background: transparent;
+  }
+
+  .comparison-table,
+  .comparison-table thead,
+  .comparison-table tbody,
+  .comparison-table tr,
+  .comparison-table th,
+  .comparison-table td {
+    display: block;
+  }
+
+  .comparison-table thead {
+    display: none;
+  }
+
+  .comparison-table tbody tr {
+    margin-block-end: 1rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: 0.75rem;
+    background-color: var(--bg-surface);
+    overflow: hidden;
+  }
+
+  .comparison-table tbody th[scope="row"] {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 2;
+    background-color: var(--bg-subtle);
+    border-inline-end: none;
+    border-block-end: 1px solid var(--border-subtle);
+    font-size: 1.05rem;
+  }
+
+  .comparison-table td {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .comparison-table td:last-child {
+    border-block-end: none;
+  }
+
+  .comparison-table td::before {
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .comparison-table td:nth-child(2)::before {
+    content: var(--col-2) ": ";
+  }
+  .comparison-table td:nth-child(3)::before {
+    content: var(--col-3) ": ";
+  }
+  .comparison-table td:nth-child(4)::before {
+    content: var(--col-4) ": ";
+  }
+  .comparison-table td:nth-child(5)::before {
+    content: var(--col-5) ": ";
+  }
+  .comparison-table td:nth-child(6)::before {
+    content: var(--col-6) ": ";
+  }
+  .comparison-table td:nth-child(7)::before {
+    content: var(--col-7) ": ";
+  }
+}
+
+/* Tabs horizontal scroll container + accessible selected indicator */
+.guide-tablist {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.35rem;
+  overflow-x: auto;
+  scroll-snap-type: inline proximity;
+  scrollbar-width: thin;
+  border-block-end: 1px solid var(--border-subtle);
+}
+
+.guide-tab {
+  position: relative;
+  flex: none;
+  scroll-snap-align: start;
+  padding: 0.85rem 1.2rem;
+  color: var(--ink-secondary);
+  font-family: var(--font-display);
+  font-weight: 600;
+  border-radius: 0.5rem 0.5rem 0 0;
+  transition: color 0.18s ease, background-color 0.18s ease;
+}
+
+.guide-tab:hover {
+  color: var(--ink-primary);
+  background-color: rgba(184, 74, 10, 0.06);
+}
+
+.guide-tab[aria-selected="true"] {
+  color: var(--accent);
+  background-color: var(--bg-surface);
+}
+
+.guide-tab[aria-selected="true"]::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  border-block-end: 3px solid var(--accent);
+}
+
+/* Native progress styling for simulator */
+progress.deploy-progress {
+  inline-size: 100%;
+  block-size: 0.5rem;
+  border-radius: 9999px;
+  overflow: hidden;
+  accent-color: var(--accent);
+}
+
+progress.deploy-progress::-webkit-progress-bar {
+  background-color: rgba(31, 25, 21, 0.1);
+  border-radius: 9999px;
+}
+
+progress.deploy-progress::-webkit-progress-value {
+  background-color: var(--accent);
+  border-radius: 9999px;
+}
+
+/* Windows Forced Colors (High Contrast) fallbacks */
+@media (forced-colors: active) {
+  .spotlight-card,
+  .star-border-shell,
+  .table-wrapper,
+  .comparison-table tbody tr {
+    border: 1px solid CanvasText;
+  }
+
+  .guide-tab[aria-selected="true"] {
+    color: Highlight;
+  }
+
+  .guide-tab[aria-selected="true"]::after {
+    border-block-end: 3px solid Highlight;
+  }
+
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline: 3px solid Highlight;
+    outline-offset: 2px;
+  }
+
+  .app-root:not(.motion-paused) .shiny-text {
+    background-image: none;
+    color: CanvasText;
+  }
+}
