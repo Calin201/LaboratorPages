@@ -25,7 +25,7 @@ const PROJECT_OPTIONS: { value: WizardAnswers['projectType']; title: string; hin
 const PRIORITY_OPTIONS: { value: WizardAnswers['priority']; title: string; hint: string }[] = [
   { value: 'easiest', title: 'Cel mai simplu posibil', hint: 'Configurare în 2 minute' },
   { value: 'github-only', title: 'Fără cont nou', hint: 'Totul rămâne în GitHub' },
-  { value: 'unlimited-bandwidth', title: 'Trafic nelimitat gratuit', hint: 'Multe imagini / vizite' },
+  { value: 'drag-and-drop', title: 'Test rapid / Formulare HTML', hint: 'Netlify Drop și formulare fără backend' },
   { value: 'pr-previews', title: 'Preview URL pe fiecare PR', hint: 'Lucru în echipă pe Git' },
 ];
 

@@ -30,7 +30,7 @@ export function HeroLaunchpad({
   const [running, setRunning] = useState<boolean>(false);
 
   const cleanUser = studentUsername.trim().replace(/[^a-zA-Z0-9-]/g, '') || 'student-dev';
-  const cleanRepo = repoName.trim().replace(/[^a-zA-Z0-9._-]/g, '') || 'proiect-lab-web';
+  const cleanRepo = repoName.trim().replace(/[^a-zA-Z0-9._-]/g, '') || 'my-public-site';
 
   useEffect(() => {
     if (!running) return;
@@ -75,8 +75,7 @@ export function HeroLaunchpad({
               Iei prin <strong className="font-semibold text-[var(--ink-primary)]">Fork</strong> repository-ul de start pe contul tău GitHub, apoi îl conectezi și îl publici gratuit pe{' '}
               <strong className="font-semibold text-[var(--ink-primary)]">GitHub Pages</strong>,{' '}
               <strong className="font-semibold text-[var(--ink-primary)]">Vercel</strong>,{' '}
-              <strong className="font-semibold text-[var(--ink-primary)]">Netlify</strong>,{' '}
-              <strong className="font-semibold text-[var(--ink-primary)]">Cloudflare Pages</strong> sau{' '}
+              <strong className="font-semibold text-[var(--ink-primary)]">Netlify</strong> sau{' '}
               <strong className="font-semibold text-[var(--ink-primary)]">Railway</strong>.
             </p>
 

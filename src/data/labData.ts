@@ -2,7 +2,6 @@ export type PlatformId =
   | 'github-pages'
   | 'vercel'
   | 'netlify'
-  | 'cloudflare-pages'
   | 'railway';
 
 export type MissionId =
@@ -14,7 +13,7 @@ export type MissionId =
   | 'generator'
   | 'quiz';
 
-export const DEFAULT_STARTER_REPO = 'profesor/proiect-lab-web';
+export const DEFAULT_STARTER_REPO = 'Calin201/my-public-site';
 
 export function parseRepoSlug(input: string): {
   owner: string;
@@ -28,14 +27,14 @@ export function parseRepoSlug(input: string): {
     .replace(/^\/+|\/+$/g, '');
 
   const parts = cleaned.split('/').filter(Boolean);
-  const rawOwner = (parts[0] || 'profesor').replace(/[^a-zA-Z0-9-]/g, '') || 'profesor';
+  const rawOwner = (parts[0] || 'Calin201').replace(/[^a-zA-Z0-9-]/g, '') || 'Calin201';
   const rawRepo =
-    (parts.length > 1 ? parts[1] : parts[0] || 'proiect-lab-web').replace(
+    (parts.length > 1 ? parts[1] : parts[0] || 'my-public-site').replace(
       /[^a-zA-Z0-9._-]/g,
       ''
-    ) || 'proiect-lab-web';
+    ) || 'my-public-site';
 
-  const owner = parts.length >= 2 ? rawOwner : 'profesor';
+  const owner = parts.length >= 2 ? rawOwner : 'Calin201';
   const repo = rawRepo;
 
   return {
@@ -174,7 +173,7 @@ export const PLATFORMS: PlatformInfo[] = [
       },
       {
         id: 'vc-2',
-        title: 'Apasă „Add New… → Project” și importă fork-ul tău (nu repo-ul profesorului)',
+        title: 'Apasă „Create New… → Project” și importă fork-ul tău (nu repo-ul profesorului)',
         detail:
           'Selectează fork-ul din lista ta de repository-uri. Dacă nu îl vezi în listă, apasă „Adjust GitHub App Permissions” și acordă acces pentru noul repository.',
       },
@@ -226,7 +225,7 @@ export const PLATFORMS: PlatformInfo[] = [
         id: 'nl-1',
         title: 'Conectează GitHub în app.netlify.com și alege fork-ul tău',
         detail:
-          'Autentifică-te cu GitHub → „Add new site → Import an existing project → GitHub”. Selectează fork-ul de pe contul tău (ajustează permisiunile aplicației Netlify dacă repo-ul nu apare).',
+          'Autentifică-te cu GitHub → „Add new project → Import a Git repository → GitHub”. Selectează fork-ul de pe contul tău (ajustează permisiunile aplicației Netlify dacă repo-ul nu apare).',
       },
       {
         id: 'nl-2',
@@ -239,71 +238,10 @@ export const PLATFORMS: PlatformInfo[] = [
         commandLabel: 'netlify.toml',
       },
       {
-        id: 'nl-3',
-        title: 'Verifică regula SPA redirect pentru rute React Router',
-        detail:
-          'Asigură-te că există blocul [[redirects]] în netlify.toml sau public/_redirects cu regula /* /index.html 200.',
-        command: `/*  /index.html  200`,
-        commandLabel: 'public/_redirects',
-      },
-      {
         id: 'nl-4',
         title: 'Apasă Deploy site și personalizează subdomeniul',
         detail:
           'După primul build verde, intră în Site configuration → Change site name ca să schimbi numele aleatoriu într-unul curat (ex. nume-proiect.netlify.app).',
-      },
-    ],
-  },
-  {
-    id: 'cloudflare-pages',
-    name: 'Cloudflare Pages',
-    shortLabel: 'Cloudflare Pages',
-    tagline: 'Bandwidth gratuit nelimitat pe rețeaua globală Cloudflare',
-    accentColor: '#B84A0A',
-    spotlightColor: 'rgba(184, 74, 10, 0.065)',
-    category: 'static',
-    requiresCard: false,
-    cardNote: 'Nu cere card bancar',
-    projectTypes: 'Site-uri statice, React/Vite, Astro, Cloudflare Functions',
-    freeQuota: 'Trafic (bandwidth) NELIMITAT gratuit, 500 build-uri/lună',
-    previewPerPr: 'Da, pe fiecare branch și PR',
-    backendSupport: 'Cloudflare Workers / Functions (Serverless la Edge)',
-    difficulty: 'Ușor',
-    bestFor: 'Site-uri cu multe imagini/video sau trafic mare unde nu vrei limite de GB',
-    pros: [
-      'Singura platformă majoră cu bandwidth gratuit nelimitat pe planul Free.',
-      'Latență foarte mică în România datorită nodului Cloudflare din București.',
-      'Protecție DDoS inclusă automat.',
-    ],
-    watchOuts: [
-      'Pentru rutare SPA, NU adăuga un _redirects cu /* /index.html 200 dacă nu ai un 404.html — Cloudflare tratează lipsa 404.html ca fallback SPA automat!',
-      'Interfața Cloudflare are multe meniuri pentru DNS/Enterprise, trebuie să intri la Workers & Pages.',
-    ],
-    urlExample: (_user, repo) => `https://${repo}.pages.dev`,
-    steps: [
-      {
-        id: 'cf-1',
-        title: 'Intră în dash.cloudflare.com → Workers & Pages → Pages',
-        detail:
-          'Creează un cont gratuit (fără card) și apasă „Workers & Pages” → tab-ul „Pages” → „Connect to Git”.',
-      },
-      {
-        id: 'cf-2',
-        title: 'Autorizează contul GitHub și selectează fork-ul tău',
-        detail:
-          'Alege fork-ul creat pe contul tău. Dacă nu apare în listă, actualizează accesul din „GitHub App Settings” și bifează noul repository.',
-      },
-      {
-        id: 'cf-3',
-        title: 'Selectează presetul de framework (ex. Vite) și NODE_VERSION',
-        detail:
-          'Cloudflare completează automat npm run build și folderul dist. Adaugă variabila de mediu NODE_VERSION = 22 dacă proiectul folosește pachete moderne.',
-      },
-      {
-        id: 'cf-4',
-        title: 'Apasă Save and Deploy',
-        detail:
-          'Primești automat un URL .pages.dev rapid cu trafic (bandwidth) gratuit nelimitat și certificat SSL activ.',
       },
     ],
   },
@@ -373,7 +311,7 @@ app.listen(PORT, '0.0.0.0', () => {
 
 export interface WizardAnswers {
   projectType: 'html' | 'react-vite' | 'nextjs' | 'backend-db';
-  priority: 'easiest' | 'github-only' | 'unlimited-bandwidth' | 'pr-previews';
+  priority: 'easiest' | 'github-only' | 'drag-and-drop' | 'pr-previews';
   secrets: 'static' | 'env-serverless' | 'persistent-db';
 }
 
@@ -390,7 +328,6 @@ export function recommendPlatforms(answers: WizardAnswers): WizardResult {
     'github-pages': 50,
     vercel: 55,
     netlify: 55,
-    'cloudflare-pages': 52,
     railway: 20,
   };
 
@@ -398,22 +335,18 @@ export function recommendPlatforms(answers: WizardAnswers): WizardResult {
   if (answers.projectType === 'html') {
     scores['github-pages'] += 28;
     scores.netlify += 26;
-    scores['cloudflare-pages'] += 20;
   } else if (answers.projectType === 'react-vite') {
     scores.vercel += 28;
     scores.netlify += 24;
-    scores['cloudflare-pages'] += 22;
     scores['github-pages'] += 16;
   } else if (answers.projectType === 'nextjs') {
     scores.vercel += 42;
-    scores['cloudflare-pages'] += 16;
     scores.netlify += 14;
     scores['github-pages'] -= 30;
   } else if (answers.projectType === 'backend-db') {
     scores.railway += 75;
     scores['github-pages'] -= 40;
     scores.netlify -= 25;
-    scores['cloudflare-pages'] -= 20;
     scores.vercel -= 15;
   }
 
@@ -423,28 +356,25 @@ export function recommendPlatforms(answers: WizardAnswers): WizardResult {
     scores.vercel += 22;
   } else if (answers.priority === 'github-only') {
     scores['github-pages'] += 40;
-  } else if (answers.priority === 'unlimited-bandwidth') {
-    scores['cloudflare-pages'] += 38;
+  } else if (answers.priority === 'drag-and-drop') {
+    scores.netlify += 34;
   } else if (answers.priority === 'pr-previews') {
     scores.vercel += 28;
     scores.netlify += 22;
-    scores['cloudflare-pages'] += 18;
   }
 
   // Backend & Secrete
   if (answers.secrets === 'static') {
     scores['github-pages'] += 15;
-    scores['cloudflare-pages'] += 12;
+    scores.netlify += 10;
   } else if (answers.secrets === 'env-serverless') {
     scores.vercel += 22;
     scores.netlify += 18;
-    scores['cloudflare-pages'] += 14;
     scores['github-pages'] -= 20;
   } else if (answers.secrets === 'persistent-db') {
     scores.railway += 65;
     scores['github-pages'] -= 45;
     scores.netlify -= 30;
-    scores['cloudflare-pages'] -= 25;
     scores.vercel -= 15;
   }
 
@@ -461,7 +391,7 @@ export function recommendPlatforms(answers: WizardAnswers): WizardResult {
     reasons.push('Ai nevoie de un server activ continuu sau de o bază de date reală — site-urile statice nu pot rula Express, FastAPI sau PostgreSQL.');
     reasons.push('Railway citește codul direct din GitHub și îți oferă PostgreSQL în același dashboard.');
     caveat =
-      'După creditul trial ($5), planul Free are $1/lună inclus. Dacă aplicația crește, poți combina frontend gratuit pe Vercel/Cloudflare cu backend pe Railway sau Render.';
+      'După creditul trial ($5), planul Free are $1/lună inclus. Dacă aplicația crește, poți combina frontend gratuit pe Vercel/Netlify cu backend pe Railway sau Render.';
   } else if (primary.id === 'github-pages') {
     reasons.push('Nu trebuie să îți faci niciun cont extern — tot codul și hostingul stau în același repo GitHub.');
     reasons.push('Perfect pentru HTML/CSS/JS sau React + Vite dacă adaugi un workflow GitHub Actions.');
@@ -471,9 +401,6 @@ export function recommendPlatforms(answers: WizardAnswers): WizardResult {
   } else if (primary.id === 'netlify') {
     reasons.push('Are cea mai prietenoasă interfață pentru începători (plus Netlify Drop pentru testare instantanee).');
     reasons.push('Primești 100 GB/lună gratuit și formulare HTML fără backend.');
-  } else if (primary.id === 'cloudflare-pages') {
-    reasons.push('Este singura opțiune majoră cu trafic (bandwidth) gratuit nelimitat.');
-    reasons.push('Are nod edge în București, deci proiectele cu multe imagini se încarcă extrem de rapid.');
   }
 
   return {
@@ -509,12 +436,12 @@ export const TROUBLESHOOTING_CASES: TroubleshootingCase[] = [
   },
   {
     id: 'fork-missing-import',
-    symptom: 'Nu găsesc fork-ul meu în lista de import din Vercel / Netlify / Cloudflare / Railway',
+    symptom: 'Nu găsesc fork-ul meu în lista de import din Vercel / Netlify / Railway',
     platformTag: 'Fork + GitHub App',
     cause:
       'Aplicația GitHub OAuth a platformei de hosting a primit acces doar la repository-uri vechi selectate anterior, nu și la fork-ul nou creat.',
     fixTitle: 'Actualizează permisiunile GitHub App pentru noul fork',
-    fixSnippet: `# În ecranul de import (Vercel / Netlify / Cloudflare):
+    fixSnippet: `# În ecranul de import (Vercel / Netlify / Railway):
 # Apasă "Adjust GitHub App Permissions" / "Configure on GitHub"
 # Selectează fork-ul nou (sau "All repositories") → Save`,
   },
@@ -562,11 +489,11 @@ import { Navbar } from './components/Navbar';`,
   {
     id: 'env-undefined',
     symptom: 'Variabila din .env este undefined pe site-ul live, deși local funcționează',
-    platformTag: 'Vite / Vercel / Netlify / Cloudflare',
+    platformTag: 'Vite / Vercel / Netlify',
     cause:
       'Fișierul .env este (corect!) ignorat în .gitignore și nu ajunge pe GitHub. În plus, Vite expune în browser doar variabilele care încep cu prefixul VITE_.',
     fixTitle: 'Adaugă variabila în dashboard-ul platformei cu prefix VITE_',
-    fixSnippet: `# În Settings → Environment Variables (Vercel / Netlify / Cloudflare)
+    fixSnippet: `# În Settings → Environment Variables (Vercel / Netlify)
 VITE_API_URL=https://api.exemplu.ro
 
 # În codul React:
@@ -640,11 +567,16 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
     id: 'q3',
     question:
-      'Care dintre aceste platforme oferă trafic (bandwidth) gratuit NELIMITAT pe planul Free pentru site-uri statice și proiecte Vite?',
-    options: ['Railway', 'GitHub Pages', 'Cloudflare Pages', 'Vercel'],
-    correctIndex: 2,
+      'De ce NU trebuie să urci niciodată folderul node_modules și fișierul .env pe GitHub?',
+    options: [
+      'GitHub blochează automat orice repository cu fișiere JavaScript',
+      'node_modules are mii de fișiere inutile (platforma le instalează singură din package.json), iar .env conține chei secrete',
+      'Vite nu poate compila dacă există .gitignore în proiect',
+      'Platformele de hosting acceptă doar fișiere HTML',
+    ],
+    correctIndex: 1,
     explanation:
-      'Cloudflare Pages este singura din listă cu bandwidth gratuit nelimitat pe planul Free (GitHub Pages, Vercel și Netlify au un plafon de ~100 GB/lună).',
+      'Platformele rulează npm install / npm ci pe baza package.json + package-lock.json. Cheile secrete se pun doar în Environment Variables din dashboard-ul platformei.',
   },
   {
     id: 'q4',

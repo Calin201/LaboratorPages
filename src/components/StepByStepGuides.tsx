@@ -22,7 +22,7 @@ export function StepByStepGuides({
   onCopyText,
 }: StepByStepGuidesProps) {
   const cleanUser = studentUsername.trim().replace(/[^a-zA-Z0-9-]/g, '') || 'student-dev';
-  const cleanRepo = repoName.trim().replace(/[^a-zA-Z0-9._-]/g, '') || 'proiect-lab-web';
+  const cleanRepo = repoName.trim().replace(/[^a-zA-Z0-9._-]/g, '') || 'my-public-site';
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [copiedId, setCopiedId] = useState<string | null>(null);

@@ -8,7 +8,7 @@ interface ComparisonMatrixProps {
 }
 
 const FILTER_OPTIONS: { id: ProjectFilter; label: string }[] = [
-  { id: 'all', label: 'Toate (5)' },
+  { id: 'all', label: 'Toate (4)' },
   { id: 'static', label: 'Frontend Static' },
   { id: 'fullstack', label: 'Full-Stack / Serverless' },
   { id: 'no-card', label: 'Fără card bancar' },
@@ -88,7 +88,7 @@ export function ComparisonMatrix({
                 id="tabel-comparatie-titlu"
                 className="border-b border-[var(--border-subtle)] bg-[var(--bg-subtle)] px-4 py-3 text-left font-[var(--font-display)] text-sm font-semibold text-[var(--ink-primary)]"
               >
-                Matrice comparativă: GitHub Pages, Vercel, Netlify, Cloudflare Pages și Railway
+                Matrice comparativă: GitHub Pages, Vercel, Netlify și Railway
               </caption>
               <thead>
                 <tr>

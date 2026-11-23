@@ -84,11 +84,12 @@ export function FooterMetaDeploy({ onCopyText }: FooterMetaDeployProps) {
               </div>
               <p className="mt-3 text-xs leading-relaxed text-[var(--ink-secondary)]">
                 După <code className="font-semibold text-[var(--ink-primary)]">git push</code>, activează{' '}
-                <strong className="text-[var(--ink-primary)]">Settings → Pages → Source: GitHub Actions</strong> pe GitHub sau importă repo-ul în Vercel, Netlify ori Cloudflare Pages.
+                <strong className="text-[var(--ink-primary)]">Settings → Pages → Source: GitHub Actions</strong> pe GitHub sau importă repo-ul în Vercel ori Netlify.
               </p>
               <p className="mt-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] px-3 py-2 text-xs text-[var(--ink-secondary)]">
-                <strong className="text-[var(--accent)]">Tip pentru profesor:</strong> trimite studenților linkul laboratorului cu parametrul{' '}
-                <code className="font-semibold text-[var(--ink-primary)]">?repo=USER-TAU/NUME-REPO</code> și Pasul 0 (Fork) se va precompleta automat pentru repository-ul tău de start.
+                <strong className="text-[var(--accent)]">Tip pentru profesor:</strong> repository-ul implicit din Pasul 0 este{' '}
+                <code className="font-semibold text-[var(--ink-primary)]">Calin201/my-public-site</code>, dar îl poți suprascrie oricând din URL cu{' '}
+                <code className="font-semibold text-[var(--ink-primary)]">?repo=USER/REPO</code>.
               </p>
             </div>
           </div>
@@ -96,7 +97,7 @@ export function FooterMetaDeploy({ onCopyText }: FooterMetaDeployProps) {
 
         <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-[var(--border-subtle)] pt-6 text-xs text-[var(--ink-secondary)]">
           <p>Deploy Lab • Resursă educațională interactivă pentru studenți (React, Motion, Tailwind CSS)</p>
-          <p>Toate cele 5 platforme oferă HTTPS gratuit și integrare cu GitHub.</p>
+          <p>Toate cele 4 platforme oferă HTTPS gratuit și integrare cu GitHub.</p>
         </div>
       </div>
     </footer>

@@ -54,7 +54,7 @@ export function DeploySimulator({
   const [autoRunning, setAutoRunning] = useState(false);
 
   const cleanUser = studentUsername.trim().replace(/[^a-zA-Z0-9-]/g, '') || 'student-dev';
-  const cleanRepo = repoName.trim().toLowerCase().replace(/[^a-z0-9-]/g, '-') || 'proiect-lab-web';
+  const cleanRepo = repoName.trim().toLowerCase().replace(/[^a-z0-9-]/g, '-') || 'my-public-site';
   const platform = PLATFORMS.find((p) => p.id === platformId) ?? PLATFORMS[0];
   const generatedUrl = platform.urlExample(cleanUser, cleanRepo);
 

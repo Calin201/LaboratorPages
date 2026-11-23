@@ -94,7 +94,7 @@ export function ForkStarterStep({
                     type="text"
                     value={starterRepoInput}
                     onChange={(e) => onChangeStarterRepo(e.target.value)}
-                    placeholder="profesor/proiect-lab-web"
+                    placeholder="Calin201/my-public-site"
                     className="mt-1.5 w-full rounded-lg border border-[var(--border-interactive)] bg-[var(--bg-surface)] px-3.5 py-2.5 font-[var(--font-mono)] text-sm text-[var(--ink-primary)]"
                   />
                 </div>
