@@ -54,12 +54,13 @@ export function DeploySimulator({
   const [autoRunning, setAutoRunning] = useState(false);
 
   const cleanUser = studentUsername.trim().replace(/[^a-zA-Z0-9-]/g, '') || 'student-dev';
-  const cleanRepo = repoName.trim().toLowerCase().replace(/[^a-z0-9-]/g, '-') || 'my-public-site';
+  const cleanRepo = repoName.trim().replace(/[^a-zA-Z0-9._-]/g, '') || 'my-public-site';
   const platform = PLATFORMS.find((p) => p.id === platformId) ?? PLATFORMS[0];
   const generatedUrl = platform.urlExample(cleanUser, cleanRepo);
 
   const incompatibleStaticBackend = stack === 'node-api' && platformId !== 'railway';
-  const effectiveBug = simulateBug || incompatibleStaticBackend;
+  const incompatibleNextjsPages = stack === 'nextjs' && platformId === 'github-pages';
+  const effectiveBug = simulateBug || incompatibleStaticBackend || incompatibleNextjsPages;
 
   const bugInfo = useMemo(() => {
     if (incompatibleStaticBackend) {
@@ -70,6 +71,17 @@ export function DeploySimulator({
           'Platformele de hosting static nu rulează app.listen(). Mută backend-ul pe Railway (sau transformă rutele în Serverless Functions).',
         fixActionLabel: 'Schimbă platforma pe Railway și re-deploy',
         fixType: 'switch-railway' as const,
+      };
+    }
+
+    if (incompatibleNextjsPages) {
+      return {
+        code: 'SSR nesuportat pe Pages',
+        title: 'GitHub Pages nu rulează serverul Next.js (SSR / API routes)',
+        detail:
+          'GitHub Pages servește doar fișiere statice HTML/CSS/JS. Pentru Next.js complet folosește Vercel (sau configurează output: "export" pentru export pur static).',
+        fixActionLabel: 'Schimbă platforma pe Vercel și re-deploy',
+        fixType: 'switch-vercel' as const,
       };
     }
 
@@ -94,6 +106,17 @@ export function DeploySimulator({
       };
     }
 
+    if (stack === 'html') {
+      return {
+        code: '404 / Cale greșită',
+        title: 'Director de publish greșit sau lipsește 404.html',
+        detail:
+          'Pentru HTML/CSS/JS simplu fără pas de build, directorul de publish trebuie să fie "." (rădăcina), nu "dist". Verifică și fișierul netlify.toml sau vercel.json.',
+        fixActionLabel: 'Setează publish = "." și re-deploy',
+        fixType: 'disable-bug' as const,
+      };
+    }
+
     return {
       code: '404 la Refresh (F5)',
       title: 'Lipsește regula SPA Rewrite pentru rutele React Router',
@@ -102,7 +125,7 @@ export function DeploySimulator({
       fixActionLabel: 'Adaugă regula rewrite și re-deploy',
       fixType: 'disable-bug' as const,
     };
-  }, [incompatibleStaticBackend, platform.name, platformId, cleanRepo]);
+  }, [incompatibleStaticBackend, incompatibleNextjsPages, platform.name, platformId, cleanRepo, stack]);
 
   const logs: LogEntry[] = useMemo(() => {
     if (stage === 'idle') {
@@ -158,6 +181,10 @@ export function DeploySimulator({
       text:
         stack === 'node-api'
           ? 'Container pornit pe 0.0.0.0:$PORT. Healthcheck HTTP 200 OK.'
+          : stack === 'html'
+          ? 'Fișierele statice (HTML/CSS/JS) au fost urcate pe rețeaua Edge CDN.'
+          : stack === 'nextjs'
+          ? 'Build Next.js (.next / out) urcat pe rețeaua Edge CDN.'
           : 'dist/ optimizat (142 KB gzip) urcat pe rețeaua Edge CDN.',
     });
     list.push({
@@ -210,6 +237,8 @@ export function DeploySimulator({
   const handleApplyFix = () => {
     if (bugInfo.fixType === 'switch-railway') {
       setPlatformId('railway');
+    } else if (bugInfo.fixType === 'switch-vercel') {
+      setPlatformId('vercel');
     }
     setSimulateBug(false);
     setStage('pushed');
@@ -227,10 +256,10 @@ export function DeploySimulator({
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-4 lg:grid-cols-12 lg:items-end">
           <div className="min-w-0 lg:col-span-6">
-            <span className="font-[var(--font-mono)] text-xs font-semibold text-[var(--accent)]">
+            <span className="font-mono text-xs font-semibold text-[var(--accent)]">
               03 / Simulator de Deploy
             </span>
-            <h2 className="mt-2 font-[var(--font-display)] text-3xl font-bold text-[var(--ink-primary)] sm:text-4xl">
+            <h2 className="mt-2 font-display text-3xl font-bold text-[var(--ink-primary)] sm:text-4xl">
               Testează publicarea înainte să atingi consola reală
             </h2>
           </div>
@@ -243,7 +272,7 @@ export function DeploySimulator({
           <div className="grid gap-8 p-5 sm:p-8 lg:grid-cols-12">
             {/* Coloana stanga: controale & terminal */}
             <div className="min-w-0 space-y-5 lg:col-span-6">
-              <div className="rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-subtle)] px-3.5 py-2.5 font-[var(--font-mono)] text-xs text-[var(--ink-secondary)]">
+              <div className="rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-subtle)] px-3.5 py-2.5 font-mono text-xs text-[var(--ink-secondary)]">
                 Fork din <span className="font-medium text-[var(--ink-primary)]">{starterRepoSlug}</span> →{' '}
                 <span className="font-semibold text-[var(--accent)]">
                   github.com/{cleanUser}/{cleanRepo}
@@ -263,7 +292,7 @@ export function DeploySimulator({
                     type="text"
                     value={repoName}
                     onChange={(e) => onChangeRepoName(e.target.value)}
-                    className="mt-1.5 w-full rounded-lg border border-[var(--border-interactive)] bg-[var(--bg-surface)] px-3.5 py-2.5 font-[var(--font-mono)] text-sm text-[var(--ink-primary)]"
+                    className="mt-1.5 w-full rounded-lg border border-[var(--border-interactive)] bg-[var(--bg-surface)] px-3.5 py-2.5 font-mono text-sm text-[var(--ink-primary)]"
                   />
                 </div>
 
@@ -393,11 +422,11 @@ export function DeploySimulator({
               {/* Terminal logs */}
               <div className="rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-subtle)] p-4">
                 <div className="mb-2 flex items-center justify-between text-xs text-[var(--ink-secondary)]">
-                  <span className="inline-flex items-center gap-1.5 font-[var(--font-mono)] font-semibold text-[var(--ink-primary)]">
+                  <span className="inline-flex items-center gap-1.5 font-mono font-semibold text-[var(--ink-primary)]">
                     <GitCommitHorizontal className="h-4 w-4 text-[var(--accent)]" aria-hidden="true" />
                     Build & Deploy Log
                   </span>
-                  <span className="font-[var(--font-mono)]">{progressValue}%</span>
+                  <span className="font-mono">{progressValue}%</span>
                 </div>
 
                 <progress
@@ -407,7 +436,7 @@ export function DeploySimulator({
                   aria-label="Progres simulare deploy"
                 />
 
-                <ul className="space-y-2 font-[var(--font-mono)] text-xs leading-relaxed">
+                <ul className="space-y-2 font-mono text-xs leading-relaxed">
                   {logs.map((entry, idx) => (
                     <li key={idx} className="flex items-start gap-2.5">
                       <span className="shrink-0 text-[var(--ink-secondary)]">{entry.time}</span>
@@ -440,7 +469,7 @@ export function DeploySimulator({
                       <span className="h-2.5 w-2.5 rounded-full bg-[var(--ink-primary)]/20" />
                     </div>
 
-                    <div className="flex min-w-0 flex-1 items-center gap-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] px-3 py-1.5 font-[var(--font-mono)] text-xs">
+                    <div className="flex min-w-0 flex-1 items-center gap-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] px-3 py-1.5 font-mono text-xs">
                       <Lock
                         className={`h-3.5 w-3.5 shrink-0 ${
                           stage === 'live'
@@ -468,7 +497,7 @@ export function DeploySimulator({
                     {stage === 'idle' && (
                       <div className="flex h-[250px] flex-col items-center justify-center text-center">
                         <Globe className="h-10 w-10 text-[var(--ink-secondary)]" aria-hidden="true" />
-                        <h3 className="mt-3 font-[var(--font-display)] text-lg font-semibold text-[var(--ink-primary)]">
+                        <h3 className="mt-3 font-display text-lg font-semibold text-[var(--ink-primary)]">
                           Site-ul nu este încă publicat
                         </h3>
                         <p className="mt-1 max-w-sm text-sm text-[var(--ink-secondary)]">
@@ -479,7 +508,7 @@ export function DeploySimulator({
 
                     {(stage === 'pushed' || stage === 'building') && (
                       <div className="flex h-[250px] flex-col items-center justify-center text-center">
-                        <div className="rounded-lg border border-[var(--accent-border)] bg-[var(--accent-soft)] px-4 py-1.5 font-[var(--font-mono)] text-xs font-semibold text-[var(--accent)]">
+                        <div className="rounded-lg border border-[var(--accent-border)] bg-[var(--accent-soft)] px-4 py-1.5 font-mono text-xs font-semibold text-[var(--accent)]">
                           {stage === 'pushed'
                             ? 'Pas 1/3: Preluare commit GitHub…'
                             : 'Pas 2/3: Se construiește proiectul…'}
@@ -497,7 +526,7 @@ export function DeploySimulator({
                           <AlertTriangle className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
                           <span>{bugInfo.code}</span>
                         </div>
-                        <h3 className="mt-3 font-[var(--font-display)] text-lg font-bold text-[var(--ink-primary)]">
+                        <h3 className="mt-3 font-display text-lg font-bold text-[var(--ink-primary)]">
                           {bugInfo.title}
                         </h3>
                         <p className="mt-2 text-sm leading-relaxed text-[var(--ink-secondary)]">
@@ -522,10 +551,10 @@ export function DeploySimulator({
                         </div>
 
                         <div className="rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-subtle)] p-5">
-                          <div className="font-[var(--font-mono)] text-xs font-semibold text-[var(--accent)]">
+                          <div className="font-mono text-xs font-semibold text-[var(--accent)]">
                             {STACK_LABELS[stack]}
                           </div>
-                          <h3 className="mt-1 font-[var(--font-display)] text-2xl font-bold text-[var(--ink-primary)]">
+                          <h3 className="mt-1 font-display text-2xl font-bold text-[var(--ink-primary)]">
                             {cleanRepo}
                           </h3>
                           <p className="mt-2 text-sm text-[var(--ink-secondary)]">

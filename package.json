@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "Laborator interactiv în limba română despre hosting gratuit de pe GitHub (GitHub Pages, Vercel, Netlify, Cloudflare Pages, Railway)",
+  "description": "Laborator interactiv în limba română despre hosting gratuit de pe GitHub (GitHub Pages, Vercel, Netlify, Railway)",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

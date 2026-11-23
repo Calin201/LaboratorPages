@@ -15,6 +15,16 @@ export type MissionId =
 
 export const DEFAULT_STARTER_REPO = 'Calin201/my-public-site';
 
+function toSubdomainSlug(repo: string): string {
+  return (
+    repo
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9-]/g, '-')
+      .replace(/^-+|-+$/g, '') || 'my-public-site'
+  );
+}
+
 export function parseRepoSlug(input: string): {
   owner: string;
   repo: string;
@@ -163,7 +173,7 @@ export const PLATFORMS: PlatformInfo[] = [
       'Planul gratuit Hobby este exclusiv pentru proiecte personale / non-comerciale.',
       'Nu poți ține un server Node continuu cu WebSockets sau un PostgreSQL intern fără servicii externe.',
     ],
-    urlExample: (_user, repo) => `https://${repo}.vercel.app`,
+    urlExample: (_user, repo) => `https://${toSubdomainSlug(repo)}.vercel.app`,
     steps: [
       {
         id: 'vc-1',
@@ -219,7 +229,7 @@ export const PLATFORMS: PlatformInfo[] = [
     watchOuts: [
       'Atenție la cele 300 de minute de build pe lună — nu face commit-uri inutile din minut în minut pe proiecte mari.',
     ],
-    urlExample: (_user, repo) => `https://${repo}.netlify.app`,
+    urlExample: (_user, repo) => `https://${toSubdomainSlug(repo)}.netlify.app`,
     steps: [
       {
         id: 'nl-1',
@@ -270,7 +280,7 @@ export const PLATFORMS: PlatformInfo[] = [
       'Hostingul gratuit de backend are mereu limite de resurse: după trial-ul de $5, planul Free oferă $1 credit/lună (suficient pentru un proiect mic de laborator, dar nu pentru trafic greu). Alternativă populară: Render Free (cu hibernare după 15 min inactivitate).',
       'Serverul tău TREBUIE să asculte pe process.env.PORT și host 0.0.0.0, nu doar pe portul fix 3000!',
     ],
-    urlExample: (_user, repo) => `https://${repo}-production.up.railway.app`,
+    urlExample: (_user, repo) => `https://${toSubdomainSlug(repo)}-production.up.railway.app`,
     steps: [
       {
         id: 'rw-1',
@@ -372,10 +382,10 @@ export function recommendPlatforms(answers: WizardAnswers): WizardResult {
     scores.netlify += 18;
     scores['github-pages'] -= 20;
   } else if (answers.secrets === 'persistent-db') {
-    scores.railway += 65;
-    scores['github-pages'] -= 45;
-    scores.netlify -= 30;
-    scores.vercel -= 15;
+    scores.railway += 95;
+    scores['github-pages'] -= 60;
+    scores.netlify -= 45;
+    scores.vercel -= 35;
   }
 
   const sortedIds = (Object.keys(scores) as PlatformId[]).sort((a, b) => scores[b] - scores[a]);

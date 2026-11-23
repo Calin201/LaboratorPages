@@ -63,7 +63,7 @@ export function HeroLaunchpad({
             <h1
               id="continut-principal"
               tabIndex={-1}
-              className="font-[var(--font-display)] text-4xl font-bold leading-[1.08] text-[var(--ink-primary)] focus:outline-none sm:text-5xl lg:text-[3.5rem]"
+              className="font-display text-4xl font-bold leading-[1.08] text-[var(--ink-primary)] focus:outline-none sm:text-5xl lg:text-[3.5rem]"
             >
               <BlurText
                 text="Fă Fork la proiectul de laborator și publică-l gratuit pe internet."
@@ -104,7 +104,7 @@ export function HeroLaunchpad({
             <div className="rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-5 sm:p-6">
               <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border-subtle)] pb-4">
                 <div>
-                  <h2 className="font-[var(--font-display)] text-base font-semibold text-[var(--ink-primary)]">
+                  <h2 className="font-display text-base font-semibold text-[var(--ink-primary)]">
                     Pipeline live Git spre Internet
                   </h2>
                   <p className="text-xs text-[var(--ink-secondary)]">
@@ -156,7 +156,7 @@ export function HeroLaunchpad({
                           <div className="text-sm font-semibold text-[var(--ink-primary)]">
                             {node.label}
                           </div>
-                          <div className="font-[var(--font-mono)] text-xs text-[var(--ink-secondary)]">
+                          <div className="font-mono text-xs text-[var(--ink-secondary)]">
                             {node.sub}
                           </div>
                         </div>
@@ -189,7 +189,7 @@ export function HeroLaunchpad({
                 <div className="text-[11px] font-medium text-[var(--ink-secondary)]">
                   Rezultat public
                 </div>
-                <div className="mt-0.5 truncate font-[var(--font-mono)] text-xs font-semibold text-[var(--accent)]">
+                <div className="mt-0.5 truncate font-mono text-xs font-semibold text-[var(--accent)]">
                   {stage >= 3 && !running ? (
                     <DecryptedText
                       text={`https://${cleanUser}.github.io/${cleanRepo}/`}

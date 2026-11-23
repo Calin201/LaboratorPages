@@ -61,10 +61,10 @@ export function PlatformWizard({
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-4 lg:grid-cols-12 lg:items-end">
           <div className="min-w-0 lg:col-span-6">
-            <span className="font-[var(--font-mono)] text-xs font-semibold text-[var(--accent)]">
+            <span className="font-mono text-xs font-semibold text-[var(--accent)]">
               01 / Busola Platformelor
             </span>
-            <h2 className="mt-2 font-[var(--font-display)] text-3xl font-bold text-[var(--ink-primary)] sm:text-4xl">
+            <h2 className="mt-2 font-display text-3xl font-bold text-[var(--ink-primary)] sm:text-4xl">
               Ce platformă alegi pentru proiectul tău?
             </h2>
           </div>
@@ -76,7 +76,7 @@ export function PlatformWizard({
         <div className="mt-10 grid gap-10 lg:grid-cols-12">
           <div className="min-w-0 divide-y divide-[var(--border-subtle)] border-t border-[var(--border-subtle)] lg:col-span-7">
             <fieldset className="py-6">
-              <legend className="font-[var(--font-display)] text-base font-semibold text-[var(--ink-primary)]">
+              <legend className="font-display text-base font-semibold text-[var(--ink-primary)]">
                 1. Ce tip de proiect urci pe GitHub?
               </legend>
               <div className="mt-3 grid gap-3 sm:grid-cols-2">
@@ -117,7 +117,7 @@ export function PlatformWizard({
             </fieldset>
 
             <fieldset className="py-6">
-              <legend className="font-[var(--font-display)] text-base font-semibold text-[var(--ink-primary)]">
+              <legend className="font-display text-base font-semibold text-[var(--ink-primary)]">
                 2. Care este prioritatea ta numărul 1?
               </legend>
               <div className="mt-3 grid gap-3 sm:grid-cols-2">
@@ -158,7 +158,7 @@ export function PlatformWizard({
             </fieldset>
 
             <fieldset className="py-6">
-              <legend className="font-[var(--font-display)] text-base font-semibold text-[var(--ink-primary)]">
+              <legend className="font-display text-base font-semibold text-[var(--ink-primary)]">
                 3. Ai nevoie de backend sau variabile secrete?
               </legend>
               <div className="mt-3 grid gap-3 sm:grid-cols-3">
@@ -215,7 +215,7 @@ export function PlatformWizard({
                         <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
                         Recomandarea #1 pentru tine
                       </div>
-                      <h3 className="mt-1 font-[var(--font-display)] text-2xl font-bold text-[var(--ink-primary)]">
+                      <h3 className="mt-1 font-display text-2xl font-bold text-[var(--ink-primary)]">
                         {recommendation.primary.name}
                       </h3>
                       <p className="mt-1 text-sm text-[var(--ink-secondary)]">
@@ -224,7 +224,7 @@ export function PlatformWizard({
                     </div>
 
                     <div className="shrink-0 rounded-lg border border-[var(--accent-border)] bg-[var(--accent-soft)] px-3 py-2 text-center">
-                      <div className="font-[var(--font-display)] text-2xl font-bold text-[var(--accent)]">
+                      <div className="font-display text-2xl font-bold text-[var(--accent)]">
                         <CountUp to={recommendation.matchScore} suffix="%" paused={motionPaused} />
                       </div>
                       <div className="text-[11px] font-medium text-[var(--ink-secondary)]">

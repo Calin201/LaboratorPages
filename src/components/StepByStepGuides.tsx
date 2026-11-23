@@ -88,10 +88,10 @@ export function StepByStepGuides({
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-4 lg:grid-cols-12 lg:items-end">
           <div className="min-w-0 lg:col-span-6">
-            <span className="font-[var(--font-mono)] text-xs font-semibold text-[var(--accent)]">
+            <span className="font-mono text-xs font-semibold text-[var(--accent)]">
               04 / Ghid Pas-cu-Pas
             </span>
-            <h2 className="mt-2 font-[var(--font-display)] text-3xl font-bold text-[var(--ink-primary)] sm:text-4xl">
+            <h2 className="mt-2 font-display text-3xl font-bold text-[var(--ink-primary)] sm:text-4xl">
               Bifează fiecare pas pe măsură ce publici
             </h2>
           </div>
@@ -118,6 +118,7 @@ export function StepByStepGuides({
                   type="button"
                   role="tab"
                   aria-selected={isSelected}
+                  aria-controls={`panel-${platform.id}`}
                   tabIndex={isSelected ? 0 : -1}
                   onClick={() => handleTabSelect(platform.id, idx)}
                   onKeyDown={(e) => handleTabKeyDown(e, idx)}
@@ -137,6 +138,7 @@ export function StepByStepGuides({
               return (
                 <div
                   key={platform.id}
+                  id={`panel-${platform.id}`}
                   ref={(el) => {
                     panelRefs.current[idx] = el;
                   }}
@@ -147,19 +149,19 @@ export function StepByStepGuides({
                   <div className="p-5 sm:p-8">
                     <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--border-subtle)] pb-5">
                       <div>
-                        <h3 className="font-[var(--font-display)] text-2xl font-bold text-[var(--ink-primary)]">
+                        <h3 className="font-display text-2xl font-bold text-[var(--ink-primary)]">
                           {platform.name}
                         </h3>
                         <p className="mt-1 text-sm text-[var(--ink-secondary)]">
                           {platform.tagline}
                         </p>
                       </div>
-                      <div className="rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-subtle)] px-3.5 py-2 font-[var(--font-mono)] text-xs font-semibold text-[var(--ink-primary)]">
+                      <div className="rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-subtle)] px-3.5 py-2 font-mono text-xs font-semibold text-[var(--ink-primary)]">
                         {completedForPlatform} / {platform.steps.length} pași bifați
                       </div>
                     </div>
 
-                    <div className="mt-4 flex flex-wrap items-center justify-between gap-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-subtle)] px-4 py-2.5 font-[var(--font-mono)] text-xs">
+                    <div className="mt-4 flex flex-wrap items-center justify-between gap-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-subtle)] px-4 py-2.5 font-mono text-xs">
                       <span className="text-[var(--ink-secondary)]">
                         Fork-ul tău:{' '}
                         <span className="font-medium text-[var(--ink-primary)]">
@@ -195,9 +197,9 @@ export function StepByStepGuides({
                               <div className="min-w-0 flex-1">
                                 <label
                                   htmlFor={`check-${step.id}`}
-                                  className="block cursor-pointer font-[var(--font-display)] text-base font-semibold text-[var(--ink-primary)]"
+                                  className="block cursor-pointer font-display text-base font-semibold text-[var(--ink-primary)]"
                                 >
-                                  <span className="mr-2 font-[var(--font-mono)] text-xs text-[var(--accent)]">
+                                  <span className="mr-2 font-mono text-xs text-[var(--accent)]">
                                     0{stepIndex + 1}
                                   </span>
                                   {step.title}
@@ -209,7 +211,7 @@ export function StepByStepGuides({
                                 {step.command && (
                                   <div className="mt-3 overflow-hidden rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-subtle)]">
                                     <div className="flex items-center justify-between border-b border-[var(--border-subtle)] bg-[var(--bg-surface)] px-3.5 py-2 text-xs">
-                                      <span className="font-[var(--font-mono)] text-[var(--ink-secondary)]">
+                                      <span className="font-mono text-[var(--ink-secondary)]">
                                         {step.commandLabel || 'Snippet'}
                                       </span>
                                       <button
@@ -236,7 +238,7 @@ export function StepByStepGuides({
                                         )}
                                       </button>
                                     </div>
-                                    <pre className="overflow-x-auto p-3.5 font-[var(--font-mono)] text-xs leading-relaxed text-[var(--ink-primary)]">
+                                    <pre className="overflow-x-auto p-3.5 font-mono text-xs leading-relaxed text-[var(--ink-primary)]">
                                       <code>{step.command}</code>
                                     </pre>
                                   </div>
@@ -260,7 +262,7 @@ export function StepByStepGuides({
 
                     <div className="mt-6 grid gap-4 md:grid-cols-2">
                       <div className="rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-subtle)] p-4">
-                        <h4 className="font-[var(--font-display)] text-sm font-semibold text-[var(--accent)]">
+                        <h4 className="font-display text-sm font-semibold text-[var(--accent)]">
                           De ce merită {platform.name}
                         </h4>
                         <ul className="mt-2 space-y-1.5 text-sm text-[var(--ink-secondary)]">
@@ -271,7 +273,7 @@ export function StepByStepGuides({
                       </div>
 
                       <div className="rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-subtle)] p-4">
-                        <h4 className="font-[var(--font-display)] text-sm font-semibold text-[var(--ink-primary)]">
+                        <h4 className="font-display text-sm font-semibold text-[var(--ink-primary)]">
                           Capcane frecvente
                         </h4>
                         <ul className="mt-2 space-y-1.5 text-sm text-[var(--ink-secondary)]">

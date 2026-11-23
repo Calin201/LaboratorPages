@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { MotionConfig } from 'motion/react';
 import { CheckCircle2 } from 'lucide-react';
 import {
@@ -69,6 +69,7 @@ export function App() {
   );
   const [liveMessage, setLiveMessage] = useState('');
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const toastTimerRef = useRef<number | null>(null);
 
   useEffect(() => {
     try {
@@ -105,11 +106,23 @@ export function App() {
     setLiveMessage('');
     window.setTimeout(() => setLiveMessage(message), 20);
     if (showVisualToast) {
+      if (toastTimerRef.current !== null) {
+        window.clearTimeout(toastTimerRef.current);
+      }
       setToastMessage(message);
-      window.setTimeout(() => {
-        setToastMessage((prev) => (prev === message ? null : prev));
+      toastTimerRef.current = window.setTimeout(() => {
+        setToastMessage(null);
+        toastTimerRef.current = null;
       }, 2400);
     }
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (toastTimerRef.current !== null) {
+        window.clearTimeout(toastTimerRef.current);
+      }
+    };
   }, []);
 
   const completeMission = useCallback((id: MissionId) => {

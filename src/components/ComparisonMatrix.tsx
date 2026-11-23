@@ -41,10 +41,10 @@ export function ComparisonMatrix({
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-4 lg:grid-cols-12 lg:items-end">
           <div className="min-w-0 lg:col-span-6">
-            <span className="font-[var(--font-mono)] text-xs font-semibold text-[var(--accent)]">
+            <span className="font-mono text-xs font-semibold text-[var(--accent)]">
               02 / Planuri Gratuite
             </span>
-            <h2 className="mt-2 font-[var(--font-display)] text-3xl font-bold text-[var(--ink-primary)] sm:text-4xl">
+            <h2 className="mt-2 font-display text-3xl font-bold text-[var(--ink-primary)] sm:text-4xl">
               Ce primești gratuit pe fiecare platformă
             </h2>
           </div>
@@ -86,7 +86,7 @@ export function ComparisonMatrix({
             <table className="comparison-table">
               <caption
                 id="tabel-comparatie-titlu"
-                className="border-b border-[var(--border-subtle)] bg-[var(--bg-subtle)] px-4 py-3 text-left font-[var(--font-display)] text-sm font-semibold text-[var(--ink-primary)]"
+                className="border-b border-[var(--border-subtle)] bg-[var(--bg-subtle)] px-4 py-3 text-left font-display text-sm font-semibold text-[var(--ink-primary)]"
               >
                 Matrice comparativă: GitHub Pages, Vercel, Netlify și Railway
               </caption>

@@ -31,7 +31,7 @@ export function FooterMetaDeploy({ onCopyText }: FooterMetaDeployProps) {
                 <Rocket className="h-4 w-4" aria-hidden="true" />
                 Meta-Deploy: acest laborator este gata de publicare
               </div>
-              <h2 className="mt-2 font-[var(--font-display)] text-2xl font-bold text-[var(--ink-primary)]">
+              <h2 className="mt-2 font-display text-2xl font-bold text-[var(--ink-primary)]">
                 Urcă acest laborator pe GitHub și postează-l live în 3 pași
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-[var(--ink-secondary)]">
@@ -56,7 +56,7 @@ export function FooterMetaDeploy({ onCopyText }: FooterMetaDeployProps) {
             <div className="min-w-0 lg:col-span-6">
               <div className="overflow-hidden rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)]">
                 <div className="flex items-center justify-between border-b border-[var(--border-subtle)] bg-[var(--bg-subtle)] px-4 py-2.5 text-xs">
-                  <span className="inline-flex items-center gap-1.5 font-[var(--font-mono)] text-[var(--ink-secondary)]">
+                  <span className="inline-flex items-center gap-1.5 font-mono text-[var(--ink-secondary)]">
                     <GitBranch className="h-3.5 w-3.5 text-[var(--accent)]" aria-hidden="true" />
                     Terminal local → GitHub
                   </span>
@@ -78,7 +78,7 @@ export function FooterMetaDeploy({ onCopyText }: FooterMetaDeployProps) {
                     )}
                   </button>
                 </div>
-                <pre className="overflow-x-auto p-4 font-[var(--font-mono)] text-xs leading-relaxed text-[var(--ink-primary)]">
+                <pre className="overflow-x-auto p-4 font-mono text-xs leading-relaxed text-[var(--ink-primary)]">
                   <code>{META_COMMANDS}</code>
                 </pre>
               </div>

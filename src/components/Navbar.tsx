@@ -39,7 +39,7 @@ export function Navbar({
           <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-[var(--accent-border)] bg-[var(--bg-subtle)] text-[var(--accent)]">
             <Rocket className="h-4 w-4" aria-hidden="true" />
           </span>
-          <span className="whitespace-nowrap font-[var(--font-display)] text-base font-bold text-[var(--ink-primary)]">
+          <span className="whitespace-nowrap font-display text-base font-bold text-[var(--ink-primary)]">
             Deploy Lab
           </span>
         </a>
@@ -58,7 +58,7 @@ export function Navbar({
 
         <div className="flex shrink-0 items-center gap-2">
           <div
-            className="flex items-center gap-1.5 whitespace-nowrap rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-subtle)] px-2.5 py-1.5 font-[var(--font-mono)] text-xs font-medium text-[var(--ink-primary)]"
+            className="flex items-center gap-1.5 whitespace-nowrap rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-subtle)] px-2.5 py-1.5 font-mono text-xs font-medium text-[var(--ink-primary)]"
             title="Progres misiuni laborator"
           >
             <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-[var(--accent)]" aria-hidden="true" />

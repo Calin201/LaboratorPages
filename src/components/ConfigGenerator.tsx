@@ -64,10 +64,10 @@ export function ConfigGenerator({
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-4 lg:grid-cols-12 lg:items-end">
           <div className="min-w-0 lg:col-span-6">
-            <span className="font-[var(--font-mono)] text-xs font-semibold text-[var(--accent)]">
+            <span className="font-mono text-xs font-semibold text-[var(--accent)]">
               05 / Generator de Configurații
             </span>
-            <h2 className="mt-2 font-[var(--font-display)] text-3xl font-bold text-[var(--ink-primary)] sm:text-4xl">
+            <h2 className="mt-2 font-display text-3xl font-bold text-[var(--ink-primary)] sm:text-4xl">
               Generează fișierele de deploy gata de pus în proiect
             </h2>
           </div>
@@ -90,7 +90,7 @@ export function ConfigGenerator({
                 type="text"
                 value={username}
                 onChange={(e) => onChangeUsername(e.target.value)}
-                className="mt-1.5 w-full rounded-lg border border-[var(--border-interactive)] bg-[var(--bg-surface)] px-3.5 py-2.5 font-[var(--font-mono)] text-sm text-[var(--ink-primary)]"
+                className="mt-1.5 w-full rounded-lg border border-[var(--border-interactive)] bg-[var(--bg-surface)] px-3.5 py-2.5 font-mono text-sm text-[var(--ink-primary)]"
               />
             </div>
 
@@ -106,7 +106,7 @@ export function ConfigGenerator({
                 type="text"
                 value={repoName}
                 onChange={(e) => onChangeRepoName(e.target.value)}
-                className="mt-1.5 w-full rounded-lg border border-[var(--border-interactive)] bg-[var(--bg-surface)] px-3.5 py-2.5 font-[var(--font-mono)] text-sm text-[var(--ink-primary)]"
+                className="mt-1.5 w-full rounded-lg border border-[var(--border-interactive)] bg-[var(--bg-surface)] px-3.5 py-2.5 font-mono text-sm text-[var(--ink-primary)]"
               />
             </div>
 
@@ -140,7 +140,7 @@ export function ConfigGenerator({
                   type="button"
                   aria-pressed={active}
                   onClick={() => setSelectedFileId(file.id)}
-                  className={`rounded-lg border px-3.5 py-2 font-[var(--font-mono)] text-xs font-medium transition-colors ${
+                  className={`rounded-lg border px-3.5 py-2 font-mono text-xs font-medium transition-colors ${
                     active
                       ? 'border-[var(--accent)] bg-[var(--accent)] text-[var(--accent-ink)]'
                       : 'border-[var(--border-interactive)] bg-[var(--bg-surface)] text-[var(--ink-secondary)] hover:border-[var(--accent)] hover:text-[var(--ink-primary)]'
@@ -189,12 +189,12 @@ export function ConfigGenerator({
 
             <div className="mt-4 overflow-hidden rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-subtle)]">
               <div className="flex items-center justify-between border-b border-[var(--border-subtle)] bg-[var(--bg-surface)] px-4 py-2 text-xs text-[var(--ink-secondary)]">
-                <span className="font-[var(--font-mono)] font-semibold text-[var(--accent)]">
+                <span className="font-mono font-semibold text-[var(--accent)]">
                   {activeFile.filename}
                 </span>
                 <span>{activeFile.languageLabel}</span>
               </div>
-              <pre className="overflow-x-auto p-4 font-[var(--font-mono)] text-xs leading-relaxed text-[var(--ink-primary)] sm:text-[13px]">
+              <pre className="overflow-x-auto p-4 font-mono text-xs leading-relaxed text-[var(--ink-primary)] sm:text-[13px]">
                 <code>{activeFile.content}</code>
               </pre>
             </div>

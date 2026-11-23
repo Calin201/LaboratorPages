@@ -66,10 +66,10 @@ export function ForkStarterStep({
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-4 lg:grid-cols-12 lg:items-end">
           <div className="min-w-0 lg:col-span-6">
-            <span className="font-[var(--font-mono)] text-xs font-semibold text-[var(--accent)]">
+            <span className="font-mono text-xs font-semibold text-[var(--accent)]">
               00 / Pregătire
             </span>
-            <h2 className="mt-2 font-[var(--font-display)] text-3xl font-bold text-[var(--ink-primary)] sm:text-4xl">
+            <h2 className="mt-2 font-display text-3xl font-bold text-[var(--ink-primary)] sm:text-4xl">
               Pornește de la un Fork pe contul tău GitHub
             </h2>
           </div>
@@ -95,7 +95,7 @@ export function ForkStarterStep({
                     value={starterRepoInput}
                     onChange={(e) => onChangeStarterRepo(e.target.value)}
                     placeholder="Calin201/my-public-site"
-                    className="mt-1.5 w-full rounded-lg border border-[var(--border-interactive)] bg-[var(--bg-surface)] px-3.5 py-2.5 font-[var(--font-mono)] text-sm text-[var(--ink-primary)]"
+                    className="mt-1.5 w-full rounded-lg border border-[var(--border-interactive)] bg-[var(--bg-surface)] px-3.5 py-2.5 font-mono text-sm text-[var(--ink-primary)]"
                   />
                 </div>
 
@@ -112,7 +112,7 @@ export function ForkStarterStep({
                     value={studentUsername}
                     onChange={(e) => onChangeStudentUsername(e.target.value)}
                     placeholder="student-dev"
-                    className="mt-1.5 w-full rounded-lg border border-[var(--border-interactive)] bg-[var(--bg-surface)] px-3.5 py-2.5 font-[var(--font-mono)] text-sm text-[var(--ink-primary)]"
+                    className="mt-1.5 w-full rounded-lg border border-[var(--border-interactive)] bg-[var(--bg-surface)] px-3.5 py-2.5 font-mono text-sm text-[var(--ink-primary)]"
                   />
                 </div>
               </div>
@@ -161,7 +161,7 @@ export function ForkStarterStep({
                   <span className="font-semibold text-[var(--ink-primary)]">
                     Am făcut Fork și am repository-ul pe contul meu GitHub
                   </span>
-                  <span className="mt-0.5 block break-all font-[var(--font-mono)] text-xs font-medium text-[var(--accent)]">
+                  <span className="mt-0.5 block break-all font-mono text-xs font-medium text-[var(--accent)]">
                     {studentRepoUrl}
                   </span>
                 </label>
@@ -196,7 +196,7 @@ export function ForkStarterStep({
                     <div className="text-[11px] font-semibold text-[var(--ink-secondary)]">
                       1. Repo Profesor (Sursă)
                     </div>
-                    <div className="mt-1 truncate font-[var(--font-mono)] text-xs font-medium text-[var(--ink-primary)]">
+                    <div className="mt-1 truncate font-mono text-xs font-medium text-[var(--ink-primary)]">
                       github.com/{parsed.slug}
                     </div>
                   </div>
@@ -209,7 +209,7 @@ export function ForkStarterStep({
                     <div className="text-[11px] font-semibold text-[var(--accent)]">
                       2. Fork pe contul tău
                     </div>
-                    <div className="mt-1 truncate font-[var(--font-mono)] text-xs font-semibold text-[var(--ink-primary)]">
+                    <div className="mt-1 truncate font-mono text-xs font-semibold text-[var(--ink-primary)]">
                       github.com/{cleanUser}/{parsed.repo}
                     </div>
                   </div>
@@ -228,7 +228,7 @@ export function ForkStarterStep({
 
               <div className="overflow-hidden rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-subtle)]">
                 <div className="flex items-center justify-between border-b border-[var(--border-subtle)] bg-[var(--bg-surface)] px-3.5 py-2 text-xs">
-                  <span className="font-[var(--font-mono)] text-[var(--ink-secondary)]">
+                  <span className="font-mono text-[var(--ink-secondary)]">
                     Opțional: clonare locală din fork-ul tău
                   </span>
                   <button
@@ -249,7 +249,7 @@ export function ForkStarterStep({
                     )}
                   </button>
                 </div>
-                <pre className="overflow-x-auto p-3.5 font-[var(--font-mono)] text-xs text-[var(--ink-primary)]">
+                <pre className="overflow-x-auto p-3.5 font-mono text-xs text-[var(--ink-primary)]">
                   <code>{cloneCmd}</code>
                 </pre>
               </div>

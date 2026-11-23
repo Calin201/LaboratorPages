@@ -6,4 +6,4 @@ dist-ssr
 .env
 .env.*
 !.env.example
-starter-peste/
+my-public-site/

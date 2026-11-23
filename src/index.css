@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@theme {
+  --font-display: 'Google Sans', system-ui, -apple-system, sans-serif;
+  --font-body: 'Google Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Google Sans Code', ui-monospace, SFMono-Regular, monospace;
+}
+
 /* Paleta stricta in 4 culori calde:
    1. #FFFFFF (--bg-surface / --accent-ink) — Pure White
    2. #FAF7F2 (--bg-canvas / --bg-subtle) — Warm Luminous Ivory
@@ -19,9 +25,6 @@
   --accent-border: rgba(184, 74, 10, 0.32);
   --border-subtle: rgba(31, 25, 21, 0.12);
   --border-interactive: rgba(31, 25, 21, 0.28);
-  --font-display: 'Google Sans', system-ui, -apple-system, sans-serif;
-  --font-body: 'Google Sans', system-ui, -apple-system, sans-serif;
-  --font-mono: 'Google Sans Code', ui-monospace, SFMono-Regular, monospace;
 }
 
 @layer base {

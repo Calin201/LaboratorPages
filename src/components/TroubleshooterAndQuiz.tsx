@@ -80,10 +80,10 @@ export function TroubleshooterAndQuiz({
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-4 lg:grid-cols-12 lg:items-end">
           <div className="min-w-0 lg:col-span-6">
-            <span className="font-[var(--font-mono)] text-xs font-semibold text-[var(--accent)]">
+            <span className="font-mono text-xs font-semibold text-[var(--accent)]">
               06 / Depanare și Verificare
             </span>
-            <h2 className="mt-2 font-[var(--font-display)] text-3xl font-bold text-[var(--ink-primary)] sm:text-4xl">
+            <h2 className="mt-2 font-display text-3xl font-bold text-[var(--ink-primary)] sm:text-4xl">
               Doctorul de Deploy și testul final
             </h2>
           </div>
@@ -95,8 +95,8 @@ export function TroubleshooterAndQuiz({
         <div className="mt-10 grid gap-12 lg:grid-cols-12">
           {/* Partea A: Doctorul de Deploy */}
           <div className="min-w-0 lg:col-span-6">
-            <h3 className="font-[var(--font-display)] text-xl font-bold text-[var(--ink-primary)]">
-              Cele 7 erori frecvente după Fork și deploy
+            <h3 className="font-display text-xl font-bold text-[var(--ink-primary)]">
+              Cele {TROUBLESHOOTING_CASES.length} erori frecvente după Fork și deploy
             </h3>
 
             <div className="mt-5 divide-y divide-[var(--border-subtle)] overflow-hidden rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-surface)]">
@@ -115,10 +115,10 @@ export function TroubleshooterAndQuiz({
                         className="flex w-full items-start justify-between gap-3 px-4 py-4 text-left transition-colors hover:bg-[var(--bg-subtle)] sm:px-5"
                       >
                         <div>
-                          <span className="inline-block rounded-md border border-[var(--border-subtle)] bg-[var(--bg-subtle)] px-2 py-0.5 font-[var(--font-mono)] text-[11px] font-medium text-[var(--accent)]">
+                          <span className="inline-block rounded-md border border-[var(--border-subtle)] bg-[var(--bg-subtle)] px-2 py-0.5 font-mono text-[11px] font-medium text-[var(--accent)]">
                             {item.platformTag}
                           </span>
-                          <span className="mt-1.5 block font-[var(--font-display)] text-base font-semibold text-[var(--ink-primary)]">
+                          <span className="mt-1.5 block font-display text-base font-semibold text-[var(--ink-primary)]">
                             {item.symptom}
                           </span>
                         </div>
@@ -171,7 +171,7 @@ export function TroubleshooterAndQuiz({
                                 )}
                               </button>
                             </div>
-                            <pre className="overflow-x-auto p-3.5 font-[var(--font-mono)] text-xs leading-relaxed text-[var(--ink-primary)]">
+                            <pre className="overflow-x-auto p-3.5 font-mono text-xs leading-relaxed text-[var(--ink-primary)]">
                               <code>{item.fixSnippet}</code>
                             </pre>
                           </div>
@@ -187,12 +187,12 @@ export function TroubleshooterAndQuiz({
           {/* Partea B: Test Rapid + Certificat */}
           <div className="min-w-0 lg:col-span-6">
             <div className="flex flex-wrap items-center justify-between gap-4">
-              <h3 className="font-[var(--font-display)] text-xl font-bold text-[var(--ink-primary)]">
+              <h3 className="font-display text-xl font-bold text-[var(--ink-primary)]">
                 Test rapid (5 întrebări)
               </h3>
 
               <div className="flex items-center gap-2">
-                <span className="rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] px-3 py-1.5 font-[var(--font-mono)] text-xs font-semibold text-[var(--ink-primary)]">
+                <span className="rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] px-3 py-1.5 font-mono text-xs font-semibold text-[var(--ink-primary)]">
                   Scor: {correctCount} / {QUIZ_QUESTIONS.length}
                 </span>
                 {answeredCount > 0 && (
@@ -219,8 +219,8 @@ export function TroubleshooterAndQuiz({
                     key={q.id}
                     className="rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-5"
                   >
-                    <h4 className="font-[var(--font-display)] text-base font-semibold text-[var(--ink-primary)]">
-                      <span className="mr-2 font-[var(--font-mono)] text-xs text-[var(--accent)]">
+                    <h4 className="font-display text-base font-semibold text-[var(--ink-primary)]">
+                      <span className="mr-2 font-mono text-xs text-[var(--accent)]">
                         0{qIdx + 1}
                       </span>
                       {q.question}
@@ -306,12 +306,12 @@ export function TroubleshooterAndQuiz({
                             <div className="text-xs font-semibold text-[var(--accent)]">
                               Certificat digital de laborator
                             </div>
-                            <h4 className="font-[var(--font-display)] text-2xl font-bold">
+                            <h4 className="font-display text-2xl font-bold">
                               <ShinyText>Deploy Ready</ShinyText>
                             </h4>
                           </div>
                         </div>
-                        <div className="font-[var(--font-mono)] text-xs font-semibold text-[var(--ink-primary)]">
+                        <div className="font-mono text-xs font-semibold text-[var(--ink-primary)]">
                           Scor: {correctCount}/5
                         </div>
                       </div>
@@ -328,7 +328,7 @@ export function TroubleshooterAndQuiz({
                           type="text"
                           value={studentName}
                           onChange={(e) => setStudentName(e.target.value)}
-                          className="mt-1.5 w-full rounded-lg border border-[var(--border-interactive)] bg-[var(--bg-surface)] px-3.5 py-2 font-[var(--font-display)] text-base font-semibold text-[var(--ink-primary)]"
+                          className="mt-1.5 w-full rounded-lg border border-[var(--border-interactive)] bg-[var(--bg-surface)] px-3.5 py-2 font-display text-base font-semibold text-[var(--ink-primary)]"
                         />
                       </div>
 
@@ -336,7 +336,7 @@ export function TroubleshooterAndQuiz({
                         <strong className="text-[var(--ink-primary)]">{studentName || 'Student'}</strong> a demonstrat că știe să facă Fork, să aleagă platforma potrivită, să configureze și să depaneze publicarea gratuită a proiectelor web de pe GitHub.
                       </p>
 
-                      <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-[var(--border-subtle)] pt-3 font-[var(--font-mono)] text-xs text-[var(--ink-secondary)]">
+                      <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-[var(--border-subtle)] pt-3 font-mono text-xs text-[var(--ink-secondary)]">
                         <span>
                           Misiuni completate: {completedMissionsCount} / {totalMissions}
                         </span>
